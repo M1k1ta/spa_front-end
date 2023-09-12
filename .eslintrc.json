@@ -35,14 +35,13 @@
             }
           }
         ],
-        "unused-vars": [
+        "no-multiple-empty-lines": [
           "error",
           {
-            "vars": "all",
-            "args": "after-used",
-            "ignoreRestSiblings": false
+            "max": 1,
+            "maxEOF": 0
           }
-      ],
+        ],
         "quotes": [
             "error",
             "single"

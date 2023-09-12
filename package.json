@@ -7,6 +7,7 @@
     "build": "react-scripts build",
     "lint": "eslint . --fix --max-warnings=0",
     "format": "prettier . --write",
+    "predeploy": "npm run eslint & npm run format",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -32,8 +33,6 @@
     "prettier": "3.0.3"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.--write": "prettier --write",
     "*.{ts,tsx}": "npm run lint",
     "*.{css,tsx,ts}": "npm run format"
   },
