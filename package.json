@@ -6,7 +6,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint . --fix --max-warnings=0",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -16,8 +17,6 @@
     "@types/node": "^16.18.50",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -28,12 +27,16 @@
   "devDependencies": {
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "prettier": "3.0.3"
   },
   "lint-staged": {
-    "*.{ts,tsx,js}": "npm run lint",
-    "*.css": "npm run format"
-    },
+    "*.js": "eslint --cache --fix",
+    "*.--write": "prettier --write",
+    "*.{ts,tsx}": "npm run lint",
+    "*.{css,tsx,ts}": "npm run format"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
