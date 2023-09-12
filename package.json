@@ -5,9 +5,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint . --fix --max-warnings=0",
+    "lint": "eslint . --max-warnings=0",
+    "lint-fix": "eslint . --fix --max-warnings=0",
     "format": "prettier . --write",
-    "test": "npm run eslint & npm run format",
+    "test": "npm run lint-fix & npm run format & npm run lint",
     "prepare": "husky install"
   },
   "dependencies": {
