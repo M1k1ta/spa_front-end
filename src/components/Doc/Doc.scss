@@ -1,0 +1,35 @@
+.doc {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+
+  &__img {
+    height: 40px;
+  }
+
+  &__name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  &__type {
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    color: #fff;
+    border-radius: 50px;
+    transform: scale(50%);
+  }
+}

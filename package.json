@@ -6,32 +6,43 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint . --max-warnings=0",
-    "lint-fix": "eslint . --fix --max-warnings=0",
     "format": "prettier . --write",
     "test": "npm run lint-fix & npm run format & npm run lint",
-    "prepare": "husky install"
+    "scss": "sass --watch src/index.scss public/index.css"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.9",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.18.50",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
+    "axios": "^1.5.0",
+    "babel-polyfill": "^6.26.0",
+    "classnames": "^2.3.2",
+    "contenido": "^1.2.5",
+    "draft-js": "^0.11.7",
+    "html-react-parser": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "save-dev": "^0.0.1-security",
+    "reaptcha": "^1.12.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/draft-js": "^0.11.12",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "prettier": "3.0.3"
+    "prettier": "3.0.3",
+    "sass": "^1.66.1"
   },
   "lint-staged": {
     "*.{ts,tsx}": "npm run lint",

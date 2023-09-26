@@ -1,0 +1,28 @@
+.photo {
+  position: relative;
+  display: inline-block;
+  opacity: 1;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &__img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    color: #fff;
+    border-radius: 50px;
+    transform: scale(50%);
+  }
+}

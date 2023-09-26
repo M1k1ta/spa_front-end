@@ -1,0 +1,59 @@
+.text-field {
+  max-width: 500px;
+
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #d1d1d1;
+    border-bottom: none;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+
+  &__formats {
+    &:first-child .text-field__button {
+      border-top-left-radius: 3px;
+    }
+  }
+
+  &__input-box {
+    position: absolute;
+    right: 5px;
+    bottom: -55px;
+    display: flex;
+    align-items: center;
+    background-color: #e0e0ff;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  &__label {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+}
+
+.text-field div.DraftEditor-root {
+  height: 300px;
+  width: 100%;
+}
+
+.text-field div.DraftEditor-editorContainer,
+.text-field div.public-DraftEditor-content {
+  height: 100%;
+}
+
+.text-field div.public-DraftEditor-content {
+  border: 1px solid #d1d1d1;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.text-field div.public-DraftEditor-content:focus {
+  border: 1px solid #000;
+}

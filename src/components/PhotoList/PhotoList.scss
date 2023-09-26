@@ -1,0 +1,22 @@
+.photo-list {
+  display: grid;
+  gap: 5px;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, 100px);
+  margin-top: 10px;
+  height: 110px;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    height: 7px;
+    // background-color: #c0caff;
+    border-radius: 50px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #163dff;
+    border-radius: 50px;
+  }
+}

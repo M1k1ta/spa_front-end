@@ -1,0 +1,15 @@
+.comment-form {
+  display: grid;
+  gap: 22px;
+  margin-bottom: 30px;
+  max-width: 500px;
+
+  &__button {
+    max-width: 150px;
+  }
+}
+
+.code-block {
+  display: block;
+  background-color: yellow;
+}
