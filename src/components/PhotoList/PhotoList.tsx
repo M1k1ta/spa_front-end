@@ -23,16 +23,14 @@ export const PhotoList: React.FC<Props> = ({ photoList, onChange }) => {
                 index={index}
                 photo={photo}
                 photoList={photoList}
-                onRemove={
-                  onChange
-                    ? () =>
-                      onChange(
-                        photoList.filter(
-                          ({ lastModified }) =>
-                            lastModified !== photo.lastModified
-                        )
-                      )
-                    : undefined
+                onRemove={onChange
+                  ? () => onChange(
+                    photoList.filter(
+                      ({ lastModified }) =>
+                        lastModified !== photo.lastModified
+                    )
+                  )
+                  : undefined
                 }
               />
             );

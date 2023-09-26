@@ -15,15 +15,14 @@ export const DocList: React.FC<Props> = ({ docList, onChange }) => {
             <Doc
               key={doc.lastModified}
               doc={doc}
-              onRemove={
-                onChange
-                  ? () => onChange(
-                    docList.filter(
-                      ({ lastModified }) =>
-                        lastModified !== doc.lastModified
-                    )
+              onRemove={onChange
+                ? () => onChange(
+                  docList.filter(
+                    ({ lastModified }) =>
+                      lastModified !== doc.lastModified
                   )
-                  : undefined
+                )
+                : undefined
               }
             />
           ))}

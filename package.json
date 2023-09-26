@@ -7,7 +7,6 @@
     "build": "react-scripts build",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier . --write",
-    "test": "npm run lint-fix & npm run format & npm run lint",
     "scss": "sass --watch src/index.scss public/index.css"
   },
   "dependencies": {
