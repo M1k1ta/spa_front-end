@@ -8,7 +8,6 @@ import {
   toggleItalic,
   addLink,
   removeLink,
-  addAtomicBlock,
   getDefaultKeyBindingFn,
   shortcutHandler,
 } from 'contenido';
@@ -17,7 +16,6 @@ import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import LinkIcon from '@mui/icons-material/Link';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
-import CodeIcon from '@mui/icons-material/Code';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { Input } from '../Input';
@@ -67,10 +65,6 @@ export const TextField: React.FC<Props> = ({
     setIsLinkInput(false);
   };
 
-  const handleAddCode = () => {
-    addAtomicBlock(value, onChange, 'code');
-  };
-
   const handleAddFile = (event: ChangeEvent<HTMLInputElement>) => {
     const newFileList: File[] = Array.from(
       event.target.files ? event.target.files : []
@@ -118,8 +112,7 @@ export const TextField: React.FC<Props> = ({
             value={isBold(value)}
             aria-label="bold"
             color="primary"
-            onMouseDown={(e) => {
-              e.preventDefault();
+            onClick={() => {
               toggleBold(value, onChange);
             }}
           >
@@ -131,8 +124,7 @@ export const TextField: React.FC<Props> = ({
             value={isItalic(value)}
             aria-label="italic"
             color="primary"
-            onMouseDown={(e) => {
-              e.preventDefault();
+            onClick={() => {
               toggleItalic(value, onChange);
             }}
           >
@@ -148,16 +140,6 @@ export const TextField: React.FC<Props> = ({
             disabled={value.getSelection().isCollapsed()}
           >
             <LinkIcon />
-          </ToggleButton>
-
-          <ToggleButton
-            type="button"
-            value={false}
-            aria-label="code"
-            color="primary"
-            onClick={handleAddCode}
-          >
-            <CodeIcon />
           </ToggleButton>
 
           <ToggleButton value={false}>

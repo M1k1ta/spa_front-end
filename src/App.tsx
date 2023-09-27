@@ -37,7 +37,7 @@ export const App: React.FC = () => {
       setPages(createPagesArr(pages));
       setConversationList(conversations);
     } catch (error) {
-      console.error(error);
+      load();
     } finally {
       setIsLoading(false);
     }

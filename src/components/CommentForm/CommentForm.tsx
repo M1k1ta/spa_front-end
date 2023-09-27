@@ -12,6 +12,7 @@ import { saveFiles } from '../../api/files';
 import { createMessage } from '../../api/comments';
 import ReCaptcha from 'react-google-recaptcha';
 import { validateEmail, validateMessage, validateHomePage, validateUserName } from '../../utils/validateFunctions';
+import { ErrorModal } from '../ErrorModal';
 
 interface Props {
   relatedId?: number;
@@ -19,8 +20,8 @@ interface Props {
   onLoad: () => void;
 }
 
-const EditorLink: React.FC<DecoratorComponentProps> = (props) => {
-  return <a href={props.href || '/'}>{props.children}</a>;
+const EditorLink: React.FC<DecoratorComponentProps> = ({ href, children }) => {
+  return <a href={href || '/'}>{children}</a>;
 };
 
 export const CommentForm: React.FC<Props> = ({
@@ -34,7 +35,7 @@ export const CommentForm: React.FC<Props> = ({
     {
       component: EditorLink,
       strategy: findEntitiesOfLink,
-    },
+    }
   ]);
 
   const [userName, setUserName] = useState('');
@@ -52,6 +53,7 @@ export const CommentForm: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [verified, setVerified] = useState(false);
   const [captcha, setCaptcha] = useState<ReCaptcha | null>(null);
+  const [modalError, setModalError] = useState('');
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -90,7 +92,7 @@ export const CommentForm: React.FC<Props> = ({
         relatedId,
       });
     } catch (error) {
-      console.log(error);
+      setModalError('Sorry, the message was not sent. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -187,6 +189,11 @@ export const CommentForm: React.FC<Props> = ({
           />
         </Button>
       )}
+
+      <ErrorModal
+        error={modalError}
+        onChange={setModalError}
+      />
     </form>
   );
 };
