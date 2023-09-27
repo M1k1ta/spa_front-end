@@ -3,7 +3,7 @@
 }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -32,9 +32,7 @@ body {
   border: 1px solid #000;
   color: #000;
   border-radius: 3px;
-  transition:
-    border-color 200ms,
-    color 200ms;
+  transition: border-color 200ms, color 200ms;
 }
 .pagination__button:hover {
   border-color: #bbb;
@@ -103,12 +101,8 @@ div.public-DraftEditor-content {
   max-width: 150px;
 }
 
-.code-block {
-  display: block;
-  background-color: yellow;
-}
-
 .text-field {
+  position: relative;
   max-width: 500px;
 }
 .text-field__header {
@@ -139,6 +133,17 @@ div.public-DraftEditor-content {
   height: 50px;
   cursor: pointer;
 }
+.text-field__error {
+  position: absolute;
+  left: 15px;
+  bottom: -5px;
+  color: #da0505;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  background-color: #fff;
+  padding: 0 3px;
+}
 
 .text-field div.DraftEditor-root {
   height: 300px;
@@ -160,6 +165,11 @@ div.public-DraftEditor-content {
 
 .text-field div.public-DraftEditor-content:focus {
   border: 1px solid #000;
+}
+
+.text-field__error-border div.public-DraftEditor-content,
+.text-field__error-border div.public-DraftEditor-content:focus {
+  border: 1px solid #da0505;
 }
 
 .custom {
@@ -294,8 +304,7 @@ div.public-DraftEditor-content {
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
-.modal__prev,
-.modal__next {
+.modal__prev, .modal__next {
   font-size: 30px;
   width: 60px;
   height: 60px;
@@ -308,12 +317,10 @@ div.public-DraftEditor-content {
   color: #fff;
   z-index: 2;
 }
-.modal__prev:hover,
-.modal__next:hover {
+.modal__prev:hover, .modal__next:hover {
   background-color: rgba(0, 0, 0, 0.3333333333);
 }
-.modal__prev:disabled,
-.modal__next:disabled {
+.modal__prev:disabled, .modal__next:disabled {
   color: #959393;
 }
 .modal__img {
@@ -372,7 +379,8 @@ div.public-DraftEditor-content {
   display: grid;
   justify-content: center;
   align-items: center;
-  background-color: rgba(238, 238, 238, 0.2);
+  background-color: #eee;
+  z-index: 1;
 }
 
 /*# sourceMappingURL=index.css.map */
