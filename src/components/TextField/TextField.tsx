@@ -25,6 +25,7 @@ import { PhotoList } from '../PhotoList';
 import { DocList } from '../DocList';
 import { ErrorModal } from '../ErrorModal';
 import classNames from 'classnames';
+import { validateLink } from '../../utils/validateFunctions';
 
 interface Props {
   value: EditorState;
@@ -50,19 +51,20 @@ export const TextField: React.FC<Props> = ({
   disabled = false,
 }) => {
   const [link, setLink] = useState('');
-  const [isInput, setIsInput] = useState(false);
+  const [isLinkInput, setIsLinkInput] = useState(false);
   const [modalError, setModalError] = useState('');
+  const [errorLink, setErrorLink] = useState('');
 
   const handleAddLink = () => {
     addLink(value, onChange, {
       href: link,
     });
-    setIsInput(false);
+    setIsLinkInput(false);
   };
 
   const handleRemoveLink = () => {
     removeLink(value, onChange);
-    setIsInput(false);
+    setIsLinkInput(false);
   };
 
   const handleAddCode = () => {
@@ -85,8 +87,6 @@ export const TextField: React.FC<Props> = ({
       if (listSetLM.has(file.lastModified)) {
         return;
       }
-
-      console.log(file.type, ' ', file.size / 1024);
 
       if (file.type === 'text/plain') {
         const sizeKB = file.size / 1024;
@@ -144,7 +144,7 @@ export const TextField: React.FC<Props> = ({
             value={false}
             aria-label="link"
             color="primary"
-            onClick={() => setIsInput(!isInput)}
+            onClick={() => setIsLinkInput(!isLinkInput)}
             disabled={value.getSelection().isCollapsed()}
           >
             <LinkIcon />
@@ -175,12 +175,14 @@ export const TextField: React.FC<Props> = ({
           </ToggleButton>
         </ToggleButtonGroup>
 
-        {isInput && (
+        {isLinkInput && (
           <div className="text-field__input-box">
             <Input
               name="https://dom.com/link"
               value={link}
               onChange={setLink}
+              error={errorLink}
+              checkError={(value) => setErrorLink(validateLink(value))}
             />
 
             <IconButton type="button" onClick={handleAddLink}>
@@ -206,7 +208,7 @@ export const TextField: React.FC<Props> = ({
           editorState={value}
           onChange={(value: EditorState) => {
             onChange(value);
-            setIsInput(false);
+            setIsLinkInput(false);
             checkError(value);
           }}
           handleKeyCommand={shortcutHandler(onChange)}
@@ -215,11 +217,22 @@ export const TextField: React.FC<Props> = ({
         />
       </div>
 
-      <PhotoList photoList={selectedPhotos} onChange={setSelectedPhotos} />
+      <PhotoList
+        photoList={selectedPhotos}
+        onChange={setSelectedPhotos}
+        disabled={disabled}
+      />
 
-      <DocList docList={selectedFiles} onChange={setSelectedFiles} />
+      <DocList
+        docList={selectedFiles}
+        onChange={setSelectedFiles}
+        disabled={disabled}
+      />
 
-      <ErrorModal error={modalError} onChange={setModalError} />
+      <ErrorModal
+        error={modalError}
+        onChange={setModalError}
+      />
     </article>
   );
 };

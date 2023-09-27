@@ -102,7 +102,6 @@ div.public-DraftEditor-content {
 }
 
 .text-field {
-  position: relative;
   max-width: 500px;
 }
 .text-field__header {
@@ -126,12 +125,16 @@ div.public-DraftEditor-content {
   background-color: #e0e0ff;
   padding: 5px;
   border-radius: 5px;
+  z-index: 1;
 }
 .text-field__label {
   position: absolute;
   width: 50px;
   height: 50px;
   cursor: pointer;
+}
+.text-field__error-border {
+  position: relative;
 }
 .text-field__error {
   position: absolute;
