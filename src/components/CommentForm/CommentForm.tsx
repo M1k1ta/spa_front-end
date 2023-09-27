@@ -11,6 +11,7 @@ import { TextField } from '../TextField';
 import { saveFiles } from '../../api/files';
 import { createMessage } from '../../api/comments';
 import ReCaptcha from 'react-google-recaptcha';
+import { validateEmail, validateMessage, validateHomePage, validateUserName } from '../../utils/validateFunctions';
 
 interface Props {
   relatedId?: number;
@@ -58,14 +59,14 @@ export const CommentForm: React.FC<Props> = ({
     const error = {
       userName: validateUserName(userName),
       email: validateEmail(email),
-      homePage: validateUrl(homePage),
+      homePage: validateHomePage(homePage),
       message: validateMessage(editorState),
     };
 
     if (error.userName || error.email || error.homePage || error.message) {
       setErrorUserName(validateUserName(userName));
       setErrorEmail(validateEmail(email));
-      setHomePage(validateUrl(homePage));
+      setHomePage(validateHomePage(homePage));
       setErrorMessage(validateMessage(editorState));
       return;
     }
@@ -109,59 +110,6 @@ export const CommentForm: React.FC<Props> = ({
     }
   };
 
-  const validateUserName = (newUserName: string) => {
-    if (newUserName === '') {
-      return 'User Name is required';
-    }
-
-    if (newUserName.length <= 3) {
-      return 'User Name length should be greater';
-    }
-
-    if (newUserName[0] !== newUserName[0].toUpperCase()) {
-      return 'User Name should begin with a capital letter';
-    }
-
-    return '';
-  };
-
-  const validateEmail = (newEmail: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!newEmail) {
-      return 'Email is required';
-    }
-
-    if (!emailRegex.test(newEmail)) {
-      return 'Email is not valid';
-    }
-
-    return '';
-  };
-
-  const validateUrl = (newUrl: string) => {
-    const urlRegex = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
-
-    if (!urlRegex.test(newUrl) && newUrl) {
-      return 'Home page should be URL';
-    }
-
-    return '';
-  };
-
-  const validateMessage = (newText: EditorState) => {
-    const text = newText.getCurrentContent().getPlainText('\u0001');
-    if (!text) {
-      return 'Message is required';
-    }
-
-    if (text.length <= 30) {
-      return 'The length of the message must be more than 30 letters';
-    }
-
-    return '';
-  };
-
   return (
     <form className="comment-form" onSubmit={handleSubmit}>
       <Input
@@ -189,7 +137,7 @@ export const CommentForm: React.FC<Props> = ({
         onChange={setHomePage}
         disabled={isLoading}
         error={errorHomePage}
-        checkError={(value) => setErrorHomePage(validateUrl(value))}
+        checkError={(value) => setErrorHomePage(validateHomePage(value))}
       />
 
       <div>

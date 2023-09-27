@@ -3,10 +3,11 @@ import { Photo } from '../Photo';
 
 interface Props {
   photoList: File[];
-  onChange?: (value: File[]) => void;
+  onChange: (value: File[]) => void;
+  disabled: boolean;
 }
 
-export const PhotoList: React.FC<Props> = ({ photoList, onChange }) => {
+export const PhotoList: React.FC<Props> = ({ photoList, onChange, disabled }) => {
   return (
     <>
       {photoList.length > 0 && (
@@ -23,14 +24,14 @@ export const PhotoList: React.FC<Props> = ({ photoList, onChange }) => {
                 index={index}
                 photo={photo}
                 photoList={photoList}
-                onRemove={onChange
-                  ? () => onChange(
+                onRemove={disabled
+                  ? undefined
+                  : () => onChange(
                     photoList.filter(
                       ({ lastModified }) =>
                         lastModified !== photo.lastModified
                     )
                   )
-                  : undefined
                 }
               />
             );

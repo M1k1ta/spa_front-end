@@ -3,10 +3,11 @@ import { Doc } from '../Doc/Doc';
 
 interface Props {
   docList: File[];
-  onChange?: (value: File[]) => void;
+  onChange: (value: File[]) => void;
+  disabled: boolean;
 }
 
-export const DocList: React.FC<Props> = ({ docList, onChange }) => {
+export const DocList: React.FC<Props> = ({ docList, onChange, disabled }) => {
   return (
     <>
       {docList.length > 0 && (
@@ -15,14 +16,14 @@ export const DocList: React.FC<Props> = ({ docList, onChange }) => {
             <Doc
               key={doc.lastModified}
               doc={doc}
-              onRemove={onChange
-                ? () => onChange(
+              onRemove={disabled
+                ? undefined
+                : () => onChange(
                   docList.filter(
                     ({ lastModified }) =>
                       lastModified !== doc.lastModified
                   )
                 )
-                : undefined
               }
             />
           ))}
