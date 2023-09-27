@@ -15,12 +15,16 @@ import { Loader } from './components/Loader';
 import { createPagesArr } from './utils/createPagesArr';
 
 export const App: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchOrder = searchParams.get('order');
+  const searchSort = searchParams.get('sort');
+  const searchPage = searchParams.get('page');
+
   const [conversationList, setConversationList] = useState<Message[]>([]);
   const [messageId, setMessageId] = useState<number>(0);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [order, setOrder] = useState(Order.Ascending);
-  const [sort, setSort] = useState(Sort.Date);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [order, setOrder] = useState(searchOrder as Order || Order.Ascending);
+  const [sort, setSort] = useState(searchSort as Sort || Sort.Date);
+  const [currentPage, setCurrentPage] = useState(Number(searchPage) || 1);
   const [pages, setPages] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -40,94 +44,88 @@ export const App: React.FC = () => {
   };
 
   useEffect(() => {
-    load();
-  }, []);
-
-  useEffect(() => {
     setSearchParams({ order, sort, page: String(currentPage) });
 
     load();
   }, [order, sort, currentPage]);
 
   return (
-    <>
-      <main className="container">
-        <CommentForm onLoad={load} />
+    <main className="container">
+      <CommentForm onLoad={load} />
 
-        <div className="menu">
-          <Button
-            variant="contained"
+      <div className="menu">
+        <Button
+          variant="contained"
+          type="button"
+          onClick={() => {
+            const order = searchParams.get('order') || Order.Ascending;
+            setOrder(
+              order === Order.Ascending ? Order.Descending : Order.Ascending
+            );
+          }}
+        >
+          <ImportExportIcon />
+        </Button>
+
+        <Button
+          variant="contained"
+          type="button"
+          onClick={() => {
+            setSort(Sort.UserName);
+          }}
+          disabled={sort === 'user-name'}
+        >
+          <PersonIcon />
+        </Button>
+
+        <Button
+          variant="contained"
+          type="button"
+          onClick={() => {
+            setSort(Sort.Email);
+          }}
+          disabled={sort === 'email'}
+        >
+          <AlternateEmailIcon />
+        </Button>
+
+        <Button
+          variant="contained"
+          type="button"
+          onClick={() => {
+            setSort(Sort.Date);
+          }}
+          disabled={sort === 'created-at'}
+        >
+          <AccessTimeIcon />
+        </Button>
+      </div>
+
+      {isLoading && <Loader />}
+
+      {conversationList.map((message) => (
+        <Conversation
+          key={message.id}
+          message={message}
+          currentFormId={messageId}
+          onSetCurrentFormId={(value) => setMessageId(value)}
+          onLoad={load}
+        />
+      ))}
+
+      <article className="pagination">
+        {pages.map((page) => (
+          <button
+            key={page}
+            className="pagination__button"
             type="button"
-            onClick={() => {
-              const order = searchParams.get('order') || Order.Ascending;
-              setOrder(
-                order === Order.Ascending ? Order.Descending : Order.Ascending
-              );
-            }}
+            onClick={() => setCurrentPage(page)}
+            disabled={page === currentPage}
           >
-            <ImportExportIcon />
-          </Button>
-
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() => {
-              setSort(Sort.UserName);
-            }}
-            disabled={sort === 'user-name'}
-          >
-            <PersonIcon />
-          </Button>
-
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() => {
-              setSort(Sort.Email);
-            }}
-            disabled={sort === 'email'}
-          >
-            <AlternateEmailIcon />
-          </Button>
-
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() => {
-              setSort(Sort.Date);
-            }}
-            disabled={sort === 'created-at'}
-          >
-            <AccessTimeIcon />
-          </Button>
-        </div>
-
-        {isLoading && <Loader />}
-
-        {conversationList.map((message) => (
-          <Conversation
-            key={message.id}
-            message={message}
-            currentFormId={messageId}
-            onSetCurrentFormId={(value) => setMessageId(value)}
-            onLoad={load}
-          />
+            {page}
+          </button>
         ))}
-
-        <article className="pagination">
-          {pages.map((page) => (
-            <button
-              key={page}
-              className="pagination__button"
-              type="button"
-              onClick={() => setCurrentPage(page)}
-              disabled={page === currentPage}
-            >
-              {page}
-            </button>
-          ))}
-        </article>
-      </main>
-    </>
+      </article>
+    </main>
   );
 };

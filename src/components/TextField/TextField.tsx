@@ -24,6 +24,7 @@ import { Input } from '../Input';
 import { PhotoList } from '../PhotoList';
 import { DocList } from '../DocList';
 import { ErrorModal } from '../ErrorModal';
+import classNames from 'classnames';
 
 interface Props {
   value: EditorState;
@@ -32,6 +33,8 @@ interface Props {
   setSelectedPhotos: (value: File[]) => void;
   selectedFiles: File[];
   setSelectedFiles: (value: File[]) => void;
+  error?: string;
+  checkError?: (value: EditorState) => void;
   disabled?: boolean;
 }
 
@@ -42,6 +45,8 @@ export const TextField: React.FC<Props> = ({
   setSelectedPhotos,
   selectedFiles,
   setSelectedFiles,
+  error = '',
+  checkError = () => { return; },
   disabled = false,
 }) => {
   const [link, setLink] = useState('');
@@ -160,7 +165,7 @@ export const TextField: React.FC<Props> = ({
             <label className="text-field__label">
               <input
                 type="file"
-                name="files"
+                name="file"
                 accept="image/png, image/jpeg, image/gif, text/plain"
                 style={{ display: 'none' }}
                 onChange={handleAddFile}
@@ -189,16 +194,26 @@ export const TextField: React.FC<Props> = ({
         )}
       </header>
 
-      <Editor
-        editorState={value}
-        onChange={(value: EditorState) => {
-          onChange(value);
-          setIsInput(false);
-        }}
-        handleKeyCommand={shortcutHandler(onChange)}
-        keyBindingFn={getDefaultKeyBindingFn}
-        readOnly={disabled}
-      />
+      <div className={classNames({
+        'text-field__error-border': error,
+      })}>
+        {error && (
+          <div className='text-field__error'>
+            {error}
+          </div>
+        )}
+        <Editor
+          editorState={value}
+          onChange={(value: EditorState) => {
+            onChange(value);
+            setIsInput(false);
+            checkError(value);
+          }}
+          handleKeyCommand={shortcutHandler(onChange)}
+          keyBindingFn={getDefaultKeyBindingFn}
+          readOnly={disabled}
+        />
+      </div>
 
       <PhotoList photoList={selectedPhotos} onChange={setSelectedPhotos} />
 

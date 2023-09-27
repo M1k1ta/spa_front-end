@@ -80,12 +80,15 @@ export const Conversation: React.FC<Props> = ({
 
         <div className="message__docs">
           {message.docs.map((doc) => (
-            <Doc key={doc.id} doc={doc} />
+            <Doc
+              key={doc.id}
+              doc={doc}
+            />
           ))}
         </div>
       </div>
 
-      <div className="message__line"></div>
+      <div className='message__line'></div>
 
       {!!message.messages.length &&
         message.messages.map((message) => (

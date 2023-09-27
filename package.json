@@ -1,51 +1,46 @@
 {
   "name": "spa_front-end",
   "version": "0.1.0",
+  "homepage": "https://m1k1ta.github.io/spa_front-end",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier . --write",
-    "scss": "sass --watch src/index.scss public/index.css"
+    "scss": "sass --watch src/index.scss public/index.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.9",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/node": "^16.18.50",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
     "axios": "^1.5.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.3.2",
     "contenido": "^1.2.5",
     "draft-js": "^0.11.7",
-    "html-react-parser": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^3.1.0",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "reaptcha": "^1.12.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
     "@types/draft-js": "^0.11.12",
+    "@types/node": "^16.18.50",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-google-recaptcha": "^2.1.6",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
+    "gh-pages": "^6.0.0",
     "prettier": "3.0.3",
     "sass": "^1.66.1"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": "npm run lint",
-    "*.{css,tsx,ts}": "npm run format"
   },
   "eslintConfig": {
     "extends": [
