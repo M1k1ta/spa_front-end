@@ -98,6 +98,10 @@ export const CommentForm: React.FC<Props> = ({
     }
 
     onLoad();
+    resetForm();
+  };
+
+  const resetForm = () => {
     setVerified(false);
     setUserName('');
     setEmail('');
