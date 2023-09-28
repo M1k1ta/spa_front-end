@@ -26,7 +26,7 @@ Next, I delved into handling file uploads and storage on the server. This took m
 Regarding pagination, it didn't take much time, and most of my time was spent on the frontend, especially on styling. I created custom-styled inputs with error handling, but I didn't implement error handling on the server because I couldn't think of what needed to be handled. If I had user data to check against the database, I would have implemented it.
 
 # Fails
-Adding code to the text is not implemented; the technology I have chosen does not have this capability under the hood, and it is not possible to customize it to include this functionality, at least from the information I found on the internet.
-CAPTCHA - implemented reCaptcha V2 because it is more reliable and up-to-date.
-
+1. Adding code to the text is not implemented; the technology I have chosen does not have this capability under the hood, and it is not possible to customize it to include this functionality, at least from the information I found on the internet.
+2. CAPTCHA - implemented reCaptcha V2 because it is more reliable and up-to-date.
+3. And I'll make the photo format 100x100 because I consider 320x240 pixels to be too large for my design.
 
