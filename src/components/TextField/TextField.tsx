@@ -58,11 +58,13 @@ export const TextField: React.FC<Props> = ({
       href: link,
     });
     setIsLinkInput(false);
+    setLink('');
   };
 
   const handleRemoveLink = () => {
     removeLink(value, onChange);
     setIsLinkInput(false);
+    setLink('');
   };
 
   const handleAddFile = (event: ChangeEvent<HTMLInputElement>) => {
