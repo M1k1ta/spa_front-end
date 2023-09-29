@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/spa_front-end/static/js/main.daff8d7a.js",
+    "main.js": "/spa_front-end/static/js/main.7455f4d2.js",
     "static/js/787.6c629056.chunk.js": "/spa_front-end/static/js/787.6c629056.chunk.js",
     "index.html": "/spa_front-end/index.html",
-    "main.daff8d7a.js.map": "/spa_front-end/static/js/main.daff8d7a.js.map",
+    "main.7455f4d2.js.map": "/spa_front-end/static/js/main.7455f4d2.js.map",
     "787.6c629056.chunk.js.map": "/spa_front-end/static/js/787.6c629056.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.daff8d7a.js"
+    "static/js/main.7455f4d2.js"
   ]
 }
