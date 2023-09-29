@@ -35,10 +35,18 @@
   &__files {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 50px;
   }
 
   &__photos {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__docs {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 
