@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { EditorState, convertToRaw, CompositeDecorator } from 'draft-js';
-import { DecoratorComponentProps, findEntitiesOfLink } from 'contenido';
+import { findEntitiesOfLink } from 'contenido';
 import {
   Button,
   CircularProgress,
@@ -13,16 +13,13 @@ import { createMessage } from '../../api/comments';
 import ReCaptcha from 'react-google-recaptcha';
 import { validateEmail, validateMessage, validateHomePage, validateUserName } from '../../utils/validateFunctions';
 import { ErrorModal } from '../ErrorModal';
+import { EditorLink } from '../EditorLink';
 
 interface Props {
   relatedId?: number;
   onSetIsForm?: () => void;
   onLoad: () => void;
 }
-
-const EditorLink: React.FC<DecoratorComponentProps> = ({ href, children }) => {
-  return <a href={href || '/'}>{children}</a>;
-};
 
 export const CommentForm: React.FC<Props> = ({
   relatedId = null,

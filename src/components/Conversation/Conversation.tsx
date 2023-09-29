@@ -1,6 +1,6 @@
 import React from 'react';
 import { Message } from '../../types/Message';
-import { Editor, EditorState, convertFromRaw } from 'draft-js';
+import { CompositeDecorator, Editor, EditorState, convertFromRaw } from 'draft-js';
 import { formatDateToCustom } from '../../utils/formatDateToCustom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import OpenInNewOffIcon from '@mui/icons-material/OpenInNewOff';
@@ -8,6 +8,8 @@ import { IconButton } from '@mui/material';
 import { CommentForm } from '../CommentForm';
 import { Photo } from '../Photo';
 import { Doc } from '../Doc';
+import { findEntitiesOfLink } from 'contenido';
+import { EditorLink } from '../EditorLink';
 
 interface Props {
   message: Message;
@@ -22,8 +24,15 @@ export const Conversation: React.FC<Props> = ({
   onSetCurrentFormId,
   onLoad,
 }) => {
+  const decorators = new CompositeDecorator([
+    {
+      component: EditorLink,
+      strategy: findEntitiesOfLink,
+    }
+  ]);
+
   const contentState = convertFromRaw(JSON.parse(message.editorState));
-  const editorState = EditorState.createWithContent(contentState);
+  const editorState = EditorState.createWithContent(contentState, decorators);
 
   const fakeSetState = () => {
     return;

@@ -54,6 +54,12 @@ export const TextField: React.FC<Props> = ({
   const [errorLink, setErrorLink] = useState('');
 
   const handleAddLink = () => {
+    error = validateLink(link);
+
+    if (error) {
+      return;
+    }
+
     addLink(value, onChange, {
       href: link,
     });
