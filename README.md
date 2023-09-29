@@ -3,7 +3,7 @@
 
 [BACK-END](https://github.com/M1k1ta/spa_back-end)
 
-[SHEMA_BD](https://www.figma.com/file/xBjjAgeCtjX7x5Kv4mYBNf/Untitled?type=whiteboard&node-id=0%3A1&t=UhbXXTrGos1xJOHf-1)
+[SCHEME_BD](https://www.figma.com/file/xBjjAgeCtjX7x5Kv4mYBNf/Untitled?type=whiteboard&node-id=0%3A1&t=UhbXXTrGos1xJOHf-1)
 
 # Tehnologies
 Front-end: React, React Router, React Material UI, classNames, SCSS(SASS), Axios, Draft-js, Contenido, TypeScript.
