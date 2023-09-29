@@ -74,9 +74,16 @@ body {
 .message__files {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 50px;
 }
 .message__photos {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.message__docs {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 .message__line {
@@ -278,6 +285,7 @@ div.public-DraftEditor-content {
   border-radius: 5px;
   padding: 10px;
   width: 300px;
+  height: 60px;
 }
 .doc__img {
   height: 40px;
