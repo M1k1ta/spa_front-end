@@ -29,4 +29,5 @@ Regarding pagination, it didn't take much time, and most of my time was spent on
 1. Adding code to the text is not implemented; the technology I have chosen does not have this capability under the hood, and it is not possible to customize it to include this functionality, at least from the information I found on the internet.
 2. CAPTCHA - implemented reCaptcha V2 because it is more reliable and up-to-date.
 3. And I'll make the photo format 100x100 because I consider 320x240 pixels to be too large for my design.
+4. The "contenido" function for creating links is also working strangely. It doesn't format the link correctly. Therefore, it inserts the default one.
 
