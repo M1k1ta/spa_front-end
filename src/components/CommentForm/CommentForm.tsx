@@ -87,8 +87,8 @@ export const CommentForm: React.FC<Props> = ({
         email,
         homePage,
         editorState: editorStateJSON,
-        photos: data.photosLinks || [],
-        docs: data.docsLinks || [],
+        photos: data.photos || [],
+        docs: data.docs || [],
         relatedId,
       });
     } catch (error) {
