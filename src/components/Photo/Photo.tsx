@@ -10,6 +10,7 @@ interface Props {
   photo: File | FileFromServer;
   photoList: File[] | FileFromServer[];
   onRemove?: () => void;
+  isDisabled?: boolean;
 }
 
 export const Photo: React.FC<Props> = ({
@@ -17,6 +18,7 @@ export const Photo: React.FC<Props> = ({
   photo,
   photoList,
   onRemove,
+  isDisabled = false,
 }) => {
   const [modalPhoto, setModalPhoto] = useState<ModalPhoto | null>(null);
 
@@ -29,7 +31,7 @@ export const Photo: React.FC<Props> = ({
           src={photo instanceof File ? URL.createObjectURL(photo) : photo.link}
         />
 
-        {onRemove && (
+        {(onRemove && !isDisabled) && (
           <div className="photo__close">
             <IconButton color="inherit" size="small" onClick={onRemove}>
               <CloseIcon />
@@ -38,11 +40,13 @@ export const Photo: React.FC<Props> = ({
         )}
       </div>
 
-      <PhotoModal
-        photo={modalPhoto}
-        photoList={photoList}
-        onChange={setModalPhoto}
-      />
+      {modalPhoto && (
+        <PhotoModal
+          photo={modalPhoto}
+          photoList={photoList}
+          onChange={setModalPhoto}
+        />
+      )}
     </>
   );
 };

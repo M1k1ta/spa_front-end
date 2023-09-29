@@ -14,14 +14,14 @@ import { EditorLink } from '../EditorLink';
 interface Props {
   message: Message;
   currentFormId: number;
-  onSetCurrentFormId: (value: number) => void;
+  onCurrentFormId: (value: number) => void;
   onLoad: () => void;
 }
 
 export const Conversation: React.FC<Props> = ({
   message,
   currentFormId,
-  onSetCurrentFormId,
+  onCurrentFormId,
   onLoad,
 }) => {
   const decorators = new CompositeDecorator([
@@ -52,7 +52,7 @@ export const Conversation: React.FC<Props> = ({
           <IconButton
             type="button"
             color="primary"
-            onClick={() => onSetCurrentFormId(0)}
+            onClick={() => onCurrentFormId(0)}
           >
             <OpenInNewOffIcon />
           </IconButton>
@@ -60,7 +60,7 @@ export const Conversation: React.FC<Props> = ({
           <IconButton
             type="button"
             color="primary"
-            onClick={() => onSetCurrentFormId(message.id)}
+            onClick={() => onCurrentFormId(message.id)}
           >
             <OpenInNewIcon />
           </IconButton>
@@ -105,7 +105,7 @@ export const Conversation: React.FC<Props> = ({
             <Conversation
               message={message}
               currentFormId={currentFormId}
-              onSetCurrentFormId={onSetCurrentFormId}
+              onCurrentFormId={onCurrentFormId}
               onLoad={onLoad}
             />
           </div>
@@ -115,7 +115,7 @@ export const Conversation: React.FC<Props> = ({
         <div className="message__box">
           <CommentForm
             relatedId={message.id}
-            onSetIsForm={() => onSetCurrentFormId(0)}
+            onIsForm={() => onCurrentFormId(0)}
             onLoad={onLoad}
           />
         </div>

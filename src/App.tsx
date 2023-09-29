@@ -108,7 +108,7 @@ export const App: React.FC = () => {
           key={message.id}
           message={message}
           currentFormId={messageId}
-          onSetCurrentFormId={(value) => setMessageId(value)}
+          onCurrentFormId={(value) => setMessageId(value)}
           onLoad={load}
         />
       ))}

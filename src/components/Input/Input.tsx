@@ -8,7 +8,7 @@ interface Props {
   onChange: (value: string) => void;
   error?: string;
   checkError?: (value: string) => void;
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 export const Input: React.FC<Props> = ({
@@ -20,7 +20,7 @@ export const Input: React.FC<Props> = ({
   checkError = () => {
     return;
   },
-  disabled = false,
+  isDisabled = false,
 }) => (
   <label className="custom">
     <input
@@ -35,7 +35,7 @@ export const Input: React.FC<Props> = ({
         onChange(event.target.value);
         checkError(event.target.value);
       }}
-      disabled={disabled}
+      disabled={isDisabled}
     />
     {error && <div className="custom__error">{error}</div>}
   </label>

@@ -14,9 +14,10 @@ const shortingName = (value: string) => {
 interface Props {
   doc: File | FileFromServer;
   onRemove?: () => void;
+  isDisabled?: boolean;
 }
 
-export const Doc: React.FC<Props> = ({ doc, onRemove }) => {
+export const Doc: React.FC<Props> = ({ doc, onRemove, isDisabled = false }) => {
   return (
     <>
       <div className="doc">
@@ -29,7 +30,7 @@ export const Doc: React.FC<Props> = ({ doc, onRemove }) => {
           <div className="doc__type">TXT</div>
         </div>
 
-        {onRemove && (
+        {(onRemove && !isDisabled) && (
           <div className="doc__close">
             <IconButton color="inherit" size="small" onClick={onRemove}>
               <CloseIcon />

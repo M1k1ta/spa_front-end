@@ -17,13 +17,13 @@ import { EditorLink } from '../EditorLink';
 
 interface Props {
   relatedId?: number;
-  onSetIsForm?: () => void;
+  onIsForm?: () => void;
   onLoad: () => void;
 }
 
 export const CommentForm: React.FC<Props> = ({
   relatedId = null,
-  onSetIsForm = () => {
+  onIsForm = () => {
     return;
   },
   onLoad,
@@ -48,7 +48,7 @@ export const CommentForm: React.FC<Props> = ({
   const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [verified, setVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
   const [captcha, setCaptcha] = useState<ReCaptcha | null>(null);
   const [modalError, setModalError] = useState('');
 
@@ -99,14 +99,14 @@ export const CommentForm: React.FC<Props> = ({
   };
 
   const resetForm = () => {
-    setVerified(false);
+    setIsVerified(false);
     setUserName('');
     setEmail('');
     setHomePage('');
     setSelectedFiles([]);
     setSelectedPhotos([]);
     setEditorState(EditorState.createEmpty());
-    onSetIsForm();
+    onIsForm();
 
     if (captcha) {
       captcha.reset();
@@ -121,7 +121,7 @@ export const CommentForm: React.FC<Props> = ({
         onChange={setUserName}
         error={errorUserName}
         checkError={(value) => setErrorUserName(validateUserName(value))}
-        disabled={isLoading}
+        isDisabled={isLoading}
       />
 
       <Input
@@ -131,14 +131,14 @@ export const CommentForm: React.FC<Props> = ({
         onChange={setEmail}
         error={errorEmail}
         checkError={(value) => setErrorEmail(validateEmail(value))}
-        disabled={isLoading}
+        isDisabled={isLoading}
       />
 
       <Input
         name="Home Page"
         value={homePage}
         onChange={setHomePage}
-        disabled={isLoading}
+        isDisabled={isLoading}
         error={errorHomePage}
         checkError={(value) => setErrorHomePage(validateHomePage(value))}
       />
@@ -153,15 +153,15 @@ export const CommentForm: React.FC<Props> = ({
           setSelectedFiles={setSelectedFiles}
           error={errorMessage}
           checkError={(value) => setErrorMessage(validateMessage(value))}
-          disabled={isLoading}
+          isDisabled={isLoading}
         />
       </div>
 
       <ReCaptcha
         ref={(e) => setCaptcha(e)}
         sitekey="6Lf2gjUoAAAAAP5gxAR3LNTc2iLyu_w-ddGaWdjX"
-        onChange={() => setVerified(true)}
-        onExpired={() => setVerified(false)}
+        onChange={() => setIsVerified(true)}
+        onExpired={() => setIsVerified(false)}
       />
 
       {!isLoading ? (
@@ -169,7 +169,7 @@ export const CommentForm: React.FC<Props> = ({
           className="comment-form__button"
           type="submit"
           variant="contained"
-          disabled={!verified}
+          disabled={!isVerified}
         >
           Send
         </Button>
@@ -191,10 +191,12 @@ export const CommentForm: React.FC<Props> = ({
         </Button>
       )}
 
-      <ErrorModal
-        error={modalError}
-        onChange={setModalError}
-      />
+      {modalError && (
+        <ErrorModal
+          error={modalError}
+          onChange={setModalError}
+        />
+      )}
     </form>
   );
 };

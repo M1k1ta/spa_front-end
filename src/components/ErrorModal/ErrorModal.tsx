@@ -7,21 +7,15 @@ interface Props {
   onChange: (value: string) => void;
 }
 
-export const ErrorModal: React.FC<Props> = ({ error, onChange }) => {
-  if (error === '') {
-    return <></>;
-  }
-
-  return (
-    <article className="error-modal">
-      <div className="error-modal__content">
-        {error}
-        <div className="error-modal__close">
-          <IconButton onClick={() => onChange('')}>
-            <CloseIcon />
-          </IconButton>
-        </div>
+export const ErrorModal: React.FC<Props> = ({ error, onChange }) => (
+  <article className="error-modal">
+    <div className="error-modal__content">
+      {error}
+      <div className="error-modal__close">
+        <IconButton onClick={() => onChange('')}>
+          <CloseIcon />
+        </IconButton>
       </div>
-    </article>
-  );
-};
+    </div>
+  </article>
+);

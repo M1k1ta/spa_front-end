@@ -34,7 +34,7 @@ interface Props {
   setSelectedFiles: (value: File[]) => void;
   error?: string;
   checkError?: (value: EditorState) => void;
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 export const TextField: React.FC<Props> = ({
@@ -46,7 +46,7 @@ export const TextField: React.FC<Props> = ({
   setSelectedFiles,
   error = '',
   checkError = () => { return; },
-  disabled = false,
+  isDisabled = false,
 }) => {
   const [link, setLink] = useState('');
   const [isLinkInput, setIsLinkInput] = useState(false);
@@ -203,26 +203,28 @@ export const TextField: React.FC<Props> = ({
           }}
           handleKeyCommand={shortcutHandler(onChange)}
           keyBindingFn={getDefaultKeyBindingFn}
-          readOnly={disabled}
+          readOnly={isDisabled}
         />
       </div>
 
       <PhotoList
         photoList={selectedPhotos}
         onChange={setSelectedPhotos}
-        disabled={disabled}
+        isDisabled={isDisabled}
       />
 
       <DocList
         docList={selectedFiles}
         onChange={setSelectedFiles}
-        disabled={disabled}
+        isDisabled={isDisabled}
       />
 
-      <ErrorModal
-        error={modalError}
-        onChange={setModalError}
-      />
+      {modalError && (
+        <ErrorModal
+          error={modalError}
+          onChange={setModalError}
+        />
+      )}
     </article>
   );
 };

@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { FileFromServer } from '../../types/FileFromServer';
 
 interface Props {
-  photo: ModalPhoto | null;
+  photo: ModalPhoto;
   photoList: File[] | FileFromServer[];
   onChange: (value: ModalPhoto | null) => void;
 }
@@ -15,10 +15,6 @@ export const PhotoModal: React.FC<Props> = ({
   photoList,
   onChange,
 }) => {
-  if (data === null) {
-    return <></>;
-  }
-
   const { photo, index } = data;
 
   return (
